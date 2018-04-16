@@ -1,0 +1,29 @@
+<table class="table" *ngIf= "searchResult.length > 0; else noResults">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">City</th>
+    <th scope="col">{{searchResult[0].forecast[0].dt_txt | date: 'HH:mm'}}</th>
+    <th scope="col">{{searchResult[0].forecast[2].dt_txt | date: 'HH:mm'}}</th>
+    <th scope="col">{{searchResult[0].forecast[4].dt_txt | date: 'HH:mm'}}</th>
+    <th scope="col">{{searchResult[0].forecast[6].dt_txt | date: 'HH:mm'}}</th>
+    <th scope="col">{{searchResult[0].forecast[8].dt_txt | date: 'HH:mm'}}</th>
+    <th scope="col">Action</th>
+
+</tr>
+  </thead>
+  <tbody>
+  <tr *ngFor= "let result of searchResult">
+    <td scope="row">{{result.city}}</td>
+    <td scope="row">{{result.forecast[0].main.temp | number : '1.0-0'}} &deg;</td>
+    <td scope="row">{{result.forecast[2].main.temp  | number : '1.0-0'}} &deg;</td>
+    <td scope="row">{{result.forecast[4].main.temp | number : '1.0-0'}} &deg;</td>
+    <td scope="row">{{result.forecast[6].main.temp | number : '1.0-0'}} &deg;</td>
+    <td scope="row">{{result.forecast[8].main.temp | number : '1.0-0'}} &deg;</td>
+    <button type ="button" id='delete' class="btn btn-danger"  (click)="deleteCity.next(result.id)">Delete</button>
+  </tr>
+  </tbody>
+</table>
+<ng-template #noResults>
+    <span style="margin: 24px">No data to display, please enter a valid City name
+    </span>
+</ng-template>
